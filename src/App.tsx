@@ -1,25 +1,25 @@
 import React from 'react'
-import { Button } from './components/ui/button'
+
+import NavigationMenu from './components/ui/NavigationMenu'
+import CardCar from './components/ui/CardCar'
+import Filter from './components/ui/Filter'
 
 function App() {
 	return (
 		<div className='App'>
-			<header className='App-header'>
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a
-					className='App-link'
-					href='https://reactjs.org'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					Learn React
-				</a>
-        <div>
-          <Button>Click</Button>
-        </div>
+			<header className='bg-black'>
+				<NavigationMenu></NavigationMenu>
 			</header>
+			<div className='px-5 flex'>
+				<span>{'Главная->Автомобили'}</span>
+				<div className='m-5'>
+					<CardCar></CardCar>
+				</div>
+                <div className='m-5'>
+					<Filter></Filter>
+				</div>
+                
+			</div>
 		</div>
 	)
 }
