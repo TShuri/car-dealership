@@ -29,10 +29,10 @@ const CardCar: FC<CardCarProps> = ({
 
 	return (
 		<>
-			<div className='flex flex-col items-center w-[345px] border-2 border-black sm:w-[245px] rounded-sm'>
+			<div className='flex flex-col items-center max-w-[345px] border-2 border-black SM:w-[245px] rounded-sm'>
 				<div>
 					<img
-						className='h-[185px] sm:h-[145px] object-cover'
+						className='h-[185px] SM:h-[145px] object-cover'
 						src={process.env.PUBLIC_URL + '/BMW.png'}
 						alt='404'
 					/>

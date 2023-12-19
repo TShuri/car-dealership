@@ -7,8 +7,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from './Select'
-
 import { Input } from './Input'
+import { Button } from './Button'
 
 interface FilterProps {
 	date?: boolean
@@ -25,6 +25,7 @@ const Filter: FC<FilterProps> = () => {
 		'Mitsubishi',
 		'Hyundai',
 		'Kia',
+		'-'
 	]
 	const models = [
 		'A',
@@ -53,31 +54,33 @@ const Filter: FC<FilterProps> = () => {
 		'X',
 		'Y',
 		'Z',
+		'-'
 	]
 	const years = [
-		'00',
-		'01',
-		'02',
-		'03',
-		'04',
-		'05',
-		'06',
-		'07',
-		'08',
-		'09',
-		'10',
-		'11',
-		'12',
-		'13',
-		'14',
-		'15',
-		'16',
-		'17',
-		'18',
-		'19',
-		'20',
-		'21',
-		'22',
+		'2000',
+		'2001',
+		'2002',
+		'2003',
+		'2004',
+		'2005',
+		'2006',
+		'2007',
+		'2008',
+		'2009',
+		'2010',
+		'2011',
+		'2012',
+		'2013',
+		'2014',
+		'2015',
+		'2016',
+		'2017',
+		'2018',
+		'2019',
+		'2020',
+		'2021',
+		'2022',
+		'-'
 	]
 	const colors = [
 		'Белый',
@@ -87,9 +90,11 @@ const Filter: FC<FilterProps> = () => {
 		'Серый',
 		'Синий',
 		'Черный',
+		'-'
 	]
-	const engines = ['Бензин', 'Дизель', 'Гибрид']
-	const gearboxes = ['АКПП', 'МКПП']
+	const engines = ['Бензин', 'Дизель', 'Гибрид', '-']
+	const gearboxes = ['АКПП', 'МКПП', '-']
+
 	// states
 	const [brand, setBrand] = useState('')
 	const [model, setModel] = useState('')
@@ -97,15 +102,12 @@ const Filter: FC<FilterProps> = () => {
 	const [color, setColor] = useState('')
 	const [Engine, setEngine] = useState('')
 	const [gearbox, setGearbox] = useState('')
-	type powerType = {
-		start: number;
-		end: number;
-	  }
-	const [power, setPower] = useState<powerType>({
-		start: 0,
-		end: 0
-	})
+	const [powerFrom, setPowerFrom] = useState(0)
+	const [powerTo, setPowerTo] = useState(300)
+	const [priceFrom, setPriceFrom] = useState(1000000)
+	const [priceTo, setPriceTo] = useState(7000000)
 
+	// handlers
 	const handlerBrand = (e: string) => {
 		setBrand(e)
 	}
@@ -121,9 +123,19 @@ const Filter: FC<FilterProps> = () => {
 	const handlerGearbox = (e: string) => {
 		setGearbox(e)
 	}
-	const handlerPower = (e: {start:number, end:number}) => {
-		setPower(e)
+	const handlerPowerFrom = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setPowerFrom(Number(event.target.value))
 	}
+	const handlerPowerTo = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setPowerTo(Number(event.target.value))
+	}
+	const handlerPriceFrom = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setPriceFrom(Number(event.target.value))
+	}
+	const handlerPriceTo = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setPriceTo(Number(event.target.value))
+	}
+
 	// renders
 	const brandsRender = brands.map((item) => {
 		return (
@@ -142,7 +154,7 @@ const Filter: FC<FilterProps> = () => {
 	const yearsRender = years.map((item) => {
 		return (
 			<SelectItem key={item} value={20 + item}>
-				{20 + item}
+				{item}
 			</SelectItem>
 		)
 	})
@@ -170,7 +182,7 @@ const Filter: FC<FilterProps> = () => {
 
 	return (
 		<>
-			<div className='flex flex-col w-[260px] border-2 border-black sm:w-[245px] rounded-md'>
+			<div className='flex flex-col w-[260px] border-2 border-black sm:w-[245px] rounded-md p-1'>
 				<div className='self-center'>
 					<b>Фильтр</b>
 				</div>
@@ -223,28 +235,63 @@ const Filter: FC<FilterProps> = () => {
 				<div>
 					<Select name='gearbox' onValueChange={handlerGearbox}>
 						<SelectTrigger className='w-full'>
-							<SelectValue placeholder='Тип двигателя' />
+							<SelectValue placeholder='Тип кпп' />
 						</SelectTrigger>
 						<SelectContent>{gearboxesRender}</SelectContent>
 					</Select>
 				</div>
 
 				<div className='self-center'>
-					<span>Мощность</span>
+					<span>Мощность (л.с.)</span>
 				</div>
 				<div className='flex flex-row'>
-					<Input placeholder='От' value={power.start} onChange={(e) => handlerPower} />
-					<p>{power.start}</p>
-					<Input placeholder='До' value={power.end} onChange={(e) => handlerPower}/>
-					<p>{power.start}</p>
+					<Input
+						name='powerFrom'
+						type='number'
+						min={100}
+						max={300}
+						maxLength={3}
+						placeholder='От'
+						onChange={handlerPowerFrom}
+					/>
+					<Input
+						name='powerTo'
+						type='number'
+						min={100}
+						max={300}
+						maxLength={3}
+						placeholder='До'
+						onChange={handlerPowerTo}
+					/>
 				</div>
 
 				<div className='self-center'>
-					<span>Цена</span>
+					<span>Цена ₽</span>
 				</div>
 				<div className='flex flex-row'>
-					<Input placeholder='От' />
-					<Input placeholder='До' />
+					<Input
+						name='priceFrom'
+						type='number'
+						min={1000000}
+						max={7000000}
+						maxLength={7}
+						placeholder='От'
+						onChange={handlerPriceFrom}
+					/>
+					<Input
+						name='priceTo'
+						type='number'
+						min={1000000}
+						max={7000000}
+						maxLength={7}
+						placeholder='До'
+						onChange={handlerPriceTo}
+					/>
+				</div>
+
+				<div className='flex flex-row my-1'>
+					<Button className='basis-1/2' variant={'outline'}>Сбросить</Button>
+					<Button className='basis-1/2' variant='default'>Показать</Button>
 				</div>
 			</div>
 		</>

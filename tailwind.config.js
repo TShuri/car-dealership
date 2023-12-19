@@ -17,20 +17,12 @@ module.exports = {
     },
     extend: {
         screens: {
-            '2xl': {'max': '1535px'},
-            // => @media (max-width: 1535px) { ... }
-      
-            'xl': {'max': '1279px'},
-            // => @media (max-width: 1279px) { ... }
-      
-            'lg': {'max': '1023px'},
-            // => @media (max-width: 1023px) { ... }
-      
-            'md': {'max': '767px'},
-            // => @media (max-width: 767px) { ... }
-      
-            'sm': {'max': '639px'},
-            // => @media (max-width: 639px) { ... }
+            '2XL': {'max': '1399px'},
+            'XL': {'max': '1199px'},
+            'LG': {'max': '1023px'},
+            'MD': {'max': '819px'},
+            'SM': {'max': '639px'},
+            'SS': {'max': '549px'}
           },
       keyframes: {
         "accordion-down": {

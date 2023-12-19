@@ -11,7 +11,7 @@ const NavigationMenu: FC<NavigationMenuProps> = ({
 	pageDeals,
 	pageServices,
 }) => {
-	const itemStyle = 'mx-8 my-4 text-white hover:cursor-pointer hover:opacity-50 sm:mx-4'
+	const itemStyle = 'flex items-center mx-8 my-4 text-white hover:cursor-pointer hover:opacity-50 SM:mx-4'
 
 	return (
 		<>
@@ -23,7 +23,7 @@ const NavigationMenu: FC<NavigationMenuProps> = ({
 					<span>Мои сделки</span>
 				</div>
 				<div className={itemStyle}>
-					<span>ТО</span>
+					<span>Тех обслуживание</span>
 				</div>
 			</div>
 		</>
