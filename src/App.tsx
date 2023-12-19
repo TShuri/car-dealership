@@ -1,25 +1,25 @@
 import React from 'react'
 
-import NavigationMenu from './components/ui/NavigationMenu'
-import CardCar from './components/ui/CardCar'
-import Filter from './components/ui/Filter'
-import CardDeal from './components/ui/CardDeal'
-import CardService from './components/ui/CardService'
-import Search from './components/ui/Search'
+import { Routes, Route } from 'react-router-dom'
+
 import Cars from './pages/Cars'
 import Deals from './pages/Deals'
 import Services from './pages/Services'
+import NotFound from './pages/NotFound'
+import { Layout } from './components/Layout'
 
 function App() {
 	return (
-		<div className=''>
-			<header className='bg-black'>
-				<NavigationMenu></NavigationMenu>
-			</header>
-			<div className='max-w-[1200px] p-5 m-auto'>
-				<Cars></Cars>
-			</div>
-		</div>
+		<>
+			<Routes>
+				<Route path='/' element={<Layout />}>
+					<Route index element={<Cars />} />
+					<Route path='deals' element={<Deals />} />
+					<Route path='services' element={<Services />} />
+					<Route path='*' element={<NotFound />} />
+				</Route>
+			</Routes>
+		</>
 	)
 }
 
