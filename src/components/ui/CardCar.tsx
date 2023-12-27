@@ -29,7 +29,7 @@ const CardCar: FC<CardCarProps> = ({
 						alt='404'
 					/>
 				</div>
-				<div className='flex flex-col items-center self-stretch gap-2 bg-gray-200 hover:cursor-pointer hover:opacity-50'>
+				<div className='flex flex-col items-center self-stretch gap-2 bg-gray-200 hover:cursor-pointer hover:opacity-50 duration-300'>
 					<div className='text-4xl font-bold'>
 						<span>{brand}</span>
 					</div>

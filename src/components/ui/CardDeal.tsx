@@ -10,7 +10,7 @@ interface CardDealProps {
 	name_employee?: string
 	email_employee?: string
 	name_client?: string
-	number_client?: string
+	phone_client?: string
 	email_client?: string
 }
 
@@ -24,7 +24,7 @@ const CardDeal: FC<CardDealProps> = ({
 	name_employee = 'Иванов Иван Иванович',
 	email_employee = 'ivanov@gmail.com',
 	name_client = 'Петров Петр Петрович',
-	number_client = '+79998887766',
+	phone_client = '+79998887766',
 	email_client = 'petrov@gmail.com'
 }) => {
     const titleStyle = 'text-lg pl-3'
@@ -60,7 +60,7 @@ const CardDeal: FC<CardDealProps> = ({
 					<div className={divItemsStyle}>
 						<span>{name_client}</span>
 						<span>{email_client}</span>
-						<span>{number_client}</span>
+						<span>{phone_client}</span>
 					</div>
 				</div>
 

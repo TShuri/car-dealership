@@ -100,6 +100,7 @@ const Cars: FC<CarsProps> = ({ employee, client }) => {
 
 	return (
 		<>
+			<h1 className='text-5xl font-semibold text-center border-b-black border-b-4 mb-5 pb-5'>Автомобили в наличии</h1>
 			<div className='grid grid-cols-4 gap-3 place-items-center XL:grid-cols-3 MD:grid-cols-2 SS:grid-cols-1'>
 				<div>
 					<Filter

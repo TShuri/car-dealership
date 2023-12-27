@@ -17,7 +17,7 @@ const NavigationMenu: FC<NavigationMenuProps> = ({
 	pageDeals,
 	pageServices,
 }) => {
-	const itemStyle = 'flex items-center mx-8 my-4 text-white hover:cursor-pointer hover:opacity-50 SM:mx-4'
+	const itemStyle = 'flex items-center mx-8 my-4 text-white hover:cursor-pointer hover:opacity-50 SM:mx-4 duration-300'
 
 	const setActive: setActiveLink = ({isActive})=>isActive ? 'opacity-60 underline underline-offset-2' : ''
 

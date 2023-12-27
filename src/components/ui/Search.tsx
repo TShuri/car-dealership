@@ -19,10 +19,10 @@ interface SearchProps {
 	setBrand: (value: string) => void
 	setModel: (value: string) => void
 
-	clickShow: () => void
+	clickSearched: () => void
 }
 
-const Search: FC<SearchProps> = ({ price_date, name_number, brand, model, setBrand, setModel, clickShow }) => {
+const Search: FC<SearchProps> = ({ price_date, name_number, brand, model, setBrand, setModel, clickSearched }) => {
 	// handlers
 	const handlerBrand = (e: string) => {
 		setBrand(e)
@@ -46,6 +46,13 @@ const Search: FC<SearchProps> = ({ price_date, name_number, brand, model, setBra
 			</SelectItem>
 		)
 	})
+
+	const thorwSearch = () => {
+		setBrand('')
+		setModel('')
+
+		clickSearched()
+	}
 
 	return (
 		<>
@@ -73,10 +80,10 @@ const Search: FC<SearchProps> = ({ price_date, name_number, brand, model, setBra
 				</div>
 
 				<div className='flex flex-row my-1'>
-					<Button className='basis-1/2' variant={'outline'}>
+					<Button className='basis-1/2' variant={'outline'} onClick={thorwSearch}>
 						Сбросить
 					</Button>
-					<Button className='basis-1/2' variant='default'>
+					<Button className='basis-1/2' variant='default' onClick={clickSearched}>
 						Найти
 					</Button>
 				</div>
