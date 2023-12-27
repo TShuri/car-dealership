@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import {
 	Select,
@@ -9,119 +9,75 @@ import {
 } from './Select'
 import { Input } from './Input'
 import { Button } from './Button'
+import { brands, models, years, colors, engines, gearboxes } from '../../models/Car'
 
 interface FilterProps {
-	date?: boolean
+	brand: string
+	model: String
+	year: string
+	color: string
+	engine: string
+	gearbox: string
+	powerFrom: number
+	powerTo: number
+	priceFrom: number
+	priceTo: number
+	setBrand: (value: string) => void
+	setModel: (value: string) => void
+	setYear: (value: string) => void
+	setColor: (value: string) => void
+	setEngine: (value: string) => void
+	setGearbox: (value: string) => void
+	setPowerFrom: (value: number) => void
+	setPowerTo: (value: number) => void
+	setPriceFrom: (value: number) => void
+	setPriceTo: (value: number) => void
+
+	clickFiltered: () => void
 }
 
-const Filter: FC<FilterProps> = () => {
-	// values
-	const brands = [
-		'BMW',
-		'Audi',
-		'Ford',
-		'Chevrolet',
-		'Toyota',
-		'Mitsubishi',
-		'Hyundai',
-		'Kia',
-		'-'
-	]
-	const models = [
-		'A',
-		'B',
-		'C',
-		'D',
-		'E',
-		'F',
-		'G',
-		'H',
-		'I',
-		'J',
-		'K',
-		'L',
-		'M',
-		'N',
-		'O',
-		'P',
-		'Q',
-		'R',
-		'S',
-		'T',
-		'U',
-		'V',
-		'W',
-		'X',
-		'Y',
-		'Z',
-		'-'
-	]
-	const years = [
-		'2000',
-		'2001',
-		'2002',
-		'2003',
-		'2004',
-		'2005',
-		'2006',
-		'2007',
-		'2008',
-		'2009',
-		'2010',
-		'2011',
-		'2012',
-		'2013',
-		'2014',
-		'2015',
-		'2016',
-		'2017',
-		'2018',
-		'2019',
-		'2020',
-		'2021',
-		'2022',
-		'-'
-	]
-	const colors = [
-		'Белый',
-		'Желтый',
-		'Зеленый',
-		'Красный',
-		'Серый',
-		'Синий',
-		'Черный',
-		'-'
-	]
-	const engines = ['Бензин', 'Дизель', 'Гибрид', '-']
-	const gearboxes = ['АКПП', 'МКПП', '-']
+const Filter: FC<FilterProps> = ({
+	brand,
+	model,
+	year,
+	color,
+	engine,
+	gearbox,
+	powerFrom,
+	powerTo,
+	priceFrom,
+	priceTo,
+	setBrand,
+	setModel,
+	setYear,
+	setColor,
+	setEngine,
+	setGearbox,
+	setPowerFrom,
+	setPowerTo,
+	setPriceFrom,
+	setPriceTo,
 
-	// states
-	const [brand, setBrand] = useState('')
-	const [model, setModel] = useState('')
-	const [year, setYear] = useState('')
-	const [color, setColor] = useState('')
-	const [Engine, setEngine] = useState('')
-	const [gearbox, setGearbox] = useState('')
-	const [powerFrom, setPowerFrom] = useState(0)
-	const [powerTo, setPowerTo] = useState(300)
-	const [priceFrom, setPriceFrom] = useState(1000000)
-	const [priceTo, setPriceTo] = useState(7000000)
-
+	clickFiltered
+}) => {
 	// handlers
 	const handlerBrand = (e: string) => {
-		setBrand(e)
+		e ==='-' ? setBrand('') : setBrand(e)
 	}
 	const handlerModel = (e: string) => {
-		setModel(e)
+		e ==='-' ? setModel('') : setModel(e)
+	}
+	const handlerYear = (e: string) => {
+		e ==='-' ? setYear('') : setYear(e)
 	}
 	const handlerColor = (e: string) => {
-		setColor(e)
+		e ==='-' ? setColor('') : setColor(e)
 	}
 	const handlerEngine = (e: string) => {
-		setEngine(e)
+		e ==='-' ? setEngine('') : setEngine(e)
 	}
 	const handlerGearbox = (e: string) => {
-		setGearbox(e)
+		e ==='-' ? setGearbox('') : setGearbox(e)
 	}
 	const handlerPowerFrom = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPowerFrom(Number(event.target.value))
@@ -153,7 +109,7 @@ const Filter: FC<FilterProps> = () => {
 	})
 	const yearsRender = years.map((item) => {
 		return (
-			<SelectItem key={item} value={20 + item}>
+			<SelectItem key={item} value={item}>
 				{item}
 			</SelectItem>
 		)
@@ -179,6 +135,22 @@ const Filter: FC<FilterProps> = () => {
 			</SelectItem>
 		)
 	})
+
+	// funtionClickButton
+	const thorwFilter = () => {
+		setBrand('')
+		setModel('')
+		setYear('')
+		setColor('')
+		setEngine('')
+		setGearbox('')
+		setPowerFrom(0)
+		setPowerTo(300)
+		setPriceFrom(1000000)
+		setPriceTo(7000000)
+
+		clickFiltered()
+	}
 
 	return (
 		<>
@@ -206,7 +178,7 @@ const Filter: FC<FilterProps> = () => {
 				</div>
 
 				<div>
-					<Select name='year' onValueChange={handlerModel}>
+					<Select name='year' onValueChange={handlerYear}>
 						<SelectTrigger className='w-full'>
 							<SelectValue placeholder='Год' />
 						</SelectTrigger>
@@ -290,8 +262,12 @@ const Filter: FC<FilterProps> = () => {
 				</div>
 
 				<div className='flex flex-row my-1'>
-					<Button className='basis-1/2' variant={'outline'}>Сбросить</Button>
-					<Button className='basis-1/2' variant='default'>Показать</Button>
+					<Button className='basis-1/2' variant={'outline'} onClick={thorwFilter}>
+						Сбросить
+					</Button>
+					<Button className='basis-1/2' variant='default' onClick={clickFiltered}>
+						Показать
+					</Button>
 				</div>
 			</div>
 		</>

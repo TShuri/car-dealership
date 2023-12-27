@@ -9,59 +9,20 @@ import {
 } from './Select'
 import { Input } from './Input'
 import { Button } from './Button'
+import { brands, models } from '../../models/Car'
 
 interface SearchProps {
 	price_date?: boolean
 	name_number?: boolean
+	brand: string
+	model: string
+	setBrand: (value: string) => void
+	setModel: (value: string) => void
+
+	clickShow: () => void
 }
 
-const Search: FC<SearchProps> = ({ price_date, name_number }) => {
-	// values
-	const brands = [
-		'BMW',
-		'Audi',
-		'Ford',
-		'Chevrolet',
-		'Toyota',
-		'Mitsubishi',
-		'Hyundai',
-		'Kia',
-		'-',
-	]
-	const models = [
-		'A',
-		'B',
-		'C',
-		'D',
-		'E',
-		'F',
-		'G',
-		'H',
-		'I',
-		'J',
-		'K',
-		'L',
-		'M',
-		'N',
-		'O',
-		'P',
-		'Q',
-		'R',
-		'S',
-		'T',
-		'U',
-		'V',
-		'W',
-		'X',
-		'Y',
-		'Z',
-		'-',
-	]
-
-	// states
-	const [brand, setBrand] = useState('')
-	const [model, setModel] = useState('')
-
+const Search: FC<SearchProps> = ({ price_date, name_number, brand, model, setBrand, setModel, clickShow }) => {
 	// handlers
 	const handlerBrand = (e: string) => {
 		setBrand(e)

@@ -11,29 +11,21 @@ interface CardCarProps {
 }
 
 const CardCar: FC<CardCarProps> = ({
-	brand,
-	model,
-	color,
-	price,
-	engine,
-	power,
-	gearbox,
-}) => {
-	brand = 'BMW'
-	model = 'X-2012'
-	color = 'Черный'
-	price = 3000000
-	engine = 'Бензин'
-	power = '220'
+	brand = 'BMW',
+	model = 'X-2012',
+	color = 'Черный',
+	price = 3000000,
+	engine = 'Бензин',
+	power = '220',
 	gearbox = 'Автомат'
-
+}) => {
 	return (
 		<>
-			<div className='flex flex-col items-center max-w-[345px] border-2 border-black SM:w-[245px] rounded-sm'>
+			<div className='flex flex-col items-center w-[275px] border-2 border-black SM:w-[245px] rounded-sm'>
 				<div>
 					<img
 						className='h-[185px] SM:h-[145px] object-cover'
-						src={process.env.PUBLIC_URL + '/BMW.png'}
+						src={process.env.PUBLIC_URL + `/${brand}.png`}
 						alt='404'
 					/>
 				</div>

@@ -15,30 +15,18 @@ interface CardDealProps {
 }
 
 const CardDeal: FC<CardDealProps> = ({
-	id_deal,
-	date_deal,
-	brand_car,
-	model_car,
-	price_car,
-	post_employee,
-	name_employee,
-	email_employee,
-	name_client,
-	number_client,
-	email_client
-}) => {
-    id_deal = 5413
-	date_deal = '19.01.2014'
-	brand_car = 'BMW'
-	model_car = 'X-2012'
-	price_car = 3500000
-	post_employee = 'Менеджер'
-	name_employee = 'Иванов Иван Иванович'
-	email_employee = 'ivanov@gmail.com'
-	name_client = 'Петров Петр Петрович'
-	number_client = '+79998887766'
+	id_deal = 5413,
+	date_deal = '19.01.2014',
+	brand_car = 'BMW',
+	model_car = 'X-2012',
+	price_car = 3500000,
+	post_employee = 'Менеджер',
+	name_employee = 'Иванов Иван Иванович',
+	email_employee = 'ivanov@gmail.com',
+	name_client = 'Петров Петр Петрович',
+	number_client = '+79998887766',
 	email_client = 'petrov@gmail.com'
-
+}) => {
     const titleStyle = 'text-lg pl-3'
 	const divStyle = 'flex flex-col'
     const divItemsStyle = 'flex flex-row gap-4 pl-3 SM:flex-col SM:gap-0'

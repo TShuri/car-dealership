@@ -12,7 +12,7 @@ const Services: FC<ServicesProps> = ({ employee, client }) => {
 		<>
 			<div className='grid grid-cols-1 gap-3'>
 				<div>
-                    <Search></Search>
+                    {/* <Search></Search> */}
                 </div>
 
                 <div>
