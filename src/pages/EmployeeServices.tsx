@@ -1,23 +1,24 @@
-import CardDeal from '../components/ui/CardDeal'
+import CardServiceEmployee from '../components/ui/CardServiceEmployee'
+import { EmployeeCarService } from '../models/EmployeeCarService'
 import { useState, useEffect } from 'react'
-import {CardDealType} from '../models/CardDealType'
 import { domain } from '../api/url'
 import axios from 'axios'
+import { Toaster } from '../components/ui/toaster'
 import Search from '../components/ui/Search'
 
-const EmployeeDeal = () => {
+const EmployeeServices = () => {
     // states for get request
-    const [deals, setDeals] = useState<CardDealType[]>([])
-	const [fetching, setFetching] = useState(true)
-	const [currentPage, setCurrentPage] = useState(1)
+    const [clientCars, setClientCars] = useState<EmployeeCarService[]>([])
+    const [fetching, setFetching] = useState(true)
+    const [currentPage, setCurrentPage] = useState(1)
 	const [empty, setEmpty] = useState(false)
 
-	// states for search
+    // states for search
 	const [brand, setBrand] = useState('')
 	const [model, setModel] = useState('')
 
     useEffect(() => {
-		const apiUrl = `${domain}/employee/deals`
+		const apiUrl = `${domain}/employee/services`
 		if (fetching) {
 		axios.get(apiUrl, {
 				params: {
@@ -31,7 +32,7 @@ const EmployeeDeal = () => {
 				if (response.data['Empty']) {
 					setEmpty(true)
 				} else {
-					setDeals([...deals, ...response.data])
+					setClientCars([...clientCars, ...response.data])
 					setCurrentPage(prevState => prevState + 1)
 				}
             })
@@ -39,7 +40,7 @@ const EmployeeDeal = () => {
 		}
 	}, [fetching])
 
-	useEffect(() => {
+    useEffect(() => {
 		document.addEventListener('scroll', scrollHandler)
 		return function () {
 			document.removeEventListener('scroll', scrollHandler)
@@ -53,28 +54,22 @@ const EmployeeDeal = () => {
 		}
 	}
 
-    const dealsRender = deals.map((el) => {
+    const clientCarsRender = clientCars.map((el) => {
         return (
-			<div key={el.id_deal}>
-				<CardDeal
-                    id_deal={el.id_deal}
-                    date_deal={el.date}
-					brand_car={el?.id_car__brand}
-                    model_car={el?.id_car__model}
-                    price_car={el?.id_car__price}
-                    post_employee={el?.id_employee__post}
-                    name_employee={el?.id_employee__name}
-                    email_employee={el?.id_employee__email}
-					name_client={el?.id_client__name}
-					email_client={el?.id_client__email}
-					phone_client={el?.id_client__phone}
-				></CardDeal>
+			<div key={el.id_car}>
+				<CardServiceEmployee
+					id_car={Number(el?.id_car)}
+                    brand={el?.id_car__brand}
+                    model={el?.id_car__model}
+                    color={el?.id_car__color}
+                    name={el?.id_client__name}
+				></CardServiceEmployee>
 			</div>
 		)
     })
 
-	const searched = () => {
-		setDeals([])
+    const searched = () => {
+		setClientCars([])
 		setCurrentPage(1)
 		setFetching(true)
 		setEmpty(false)
@@ -82,9 +77,8 @@ const EmployeeDeal = () => {
 
 	return (
 		<>
-			<div className='grid grid-cols-1 gap-3'>
-				<div className='grid grid-cols-3'>
-					<div className=''>
+			<h1 className='text-5xl font-semibold text-center border-b-black border-b-4 mb-5 pb-5'>Обслуживание автомобилей ваших клиентов</h1>
+			<div className='flex justify-center mb-2'>
 						<Search
 							brand={brand}
 							model={model}
@@ -93,12 +87,12 @@ const EmployeeDeal = () => {
 							clickSearched={searched}
 							></Search>
 					</div>
-					<h1 className='text-5xl font-semibold text-center col-span-2 pt-10 border-b-black border-b-4'>Ваши сделки</h1>
-				</div>
-                {dealsRender}
+            <div className='flex flex-col items-center gap-2'>
+                {clientCarsRender}
 			</div>
+			<Toaster/>
 		</>
 	)
 }
 
-export default EmployeeDeal
+export default EmployeeServices

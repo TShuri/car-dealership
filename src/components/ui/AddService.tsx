@@ -44,7 +44,7 @@ const AddService: FC<AddServiceProps> = ({ id_car, closeModal }) => {
 				} else {
                     toast({
                         title: "Успешно",
-                        description: `Вы успешно записались на ТО на ${date}`,
+                        description: `Вы успешно назначили ТО на ${date}`,
                     })
                     closeModal(false)
                 }
@@ -53,7 +53,7 @@ const AddService: FC<AddServiceProps> = ({ id_car, closeModal }) => {
 
 	return (
 		<>
-			<div className='flex flex-col items-center mt-80 gap-10'>
+			<div className='flex flex-col items-center gap-10'>
 				<h2 className='text-3xl font-medium mb-5'>
 					Выберите дату записи на техническое обслуживание
 				</h2>

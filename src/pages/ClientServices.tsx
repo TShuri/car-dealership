@@ -1,16 +1,13 @@
 import CardServiceClient from '../components/ui/CardServiceClient'
 import { ClientCarService } from '@/models/ClientCarService'
-import { FC, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { domain } from '../api/url'
 import axios from 'axios'
 import { Toaster } from '../components/ui/toaster'
 
-interface ServicesProps {
-	employee?: boolean
-	client?: boolean
-}
 
-const ClientServices: FC<ServicesProps> = ({ employee, client }) => {
+
+const ClientServices = () => {
     const [clientCars, setClientCars] = useState<ClientCarService[]>([])
     const [fetching, setFetching] = useState(true)
 
@@ -19,7 +16,7 @@ const ClientServices: FC<ServicesProps> = ({ employee, client }) => {
 		if (fetching) {
 		axios.get(apiUrl, {
 				params: {
-					id_client: 66538
+					id_client: localStorage.getItem('id')
 				},
 			})
 			.then((response) => {

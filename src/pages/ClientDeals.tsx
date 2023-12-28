@@ -1,15 +1,10 @@
 import CardDeal from '../components/ui/CardDeal'
-import { FC, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {CardDealType} from '../models/CardDealType'
 import { domain } from '../api/url'
 import axios from 'axios'
 
-interface DealsProps {
-	employee?: boolean
-	client?: boolean
-}
-
-const ClientDeals: FC<DealsProps> = ({ employee, client }) => {
+const ClientDeals = () => {
     // states for get request
     const [deals, setDeals] = useState<CardDealType[]>([])
 	const [fetching, setFetching] = useState(true)
@@ -19,7 +14,7 @@ const ClientDeals: FC<DealsProps> = ({ employee, client }) => {
 		if (fetching) {
 		axios.get(apiUrl, {
 				params: {
-					id_client: 66538
+					id_client: localStorage.getItem('id')
 				},
 			})
 			.then((response) => {
